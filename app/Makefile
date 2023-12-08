@@ -2,21 +2,21 @@ run-dist:
 	./build/install/app/bin/app
 
 clean:
-	gradlew clean
+	gradle clean
 
 build:
-	gradlew installDist
+	gradle installDist
 
 run:
-	gradlew run
+	gradle run
 
 lint:
-	gradlew checkstyleMain
+	gradle checkstyleMain
 
 test:
-	gradlew test
+	gradle test
 
 report:
-	gradlew jacocoTestReport
+	gradle jacocoTestReport
 
 .PHONY: build
