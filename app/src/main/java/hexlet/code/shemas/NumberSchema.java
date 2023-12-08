@@ -22,13 +22,21 @@ public class NumberSchema {
         return this;
     }
 
-    public boolean isValid(int number) {
-        if (required && number == 0) {
-            return false;
+    public boolean isValid(Integer number) {
+        if (required) {
+            if (number == null) {
+                return false;
+            }
+        } else {
+            if (number == null) {
+                return true;
+            }
         }
-        if (positive && number <= 0 ) {
-            return false;
+
+        if (positive && number > 0) {
+            return true;
         }
+
         if (number < minNumber || number > maxNumber) {
             return false;
         }
