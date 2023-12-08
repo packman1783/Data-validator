@@ -32,11 +32,9 @@ public class NumberSchema {
                 return true;
             }
         }
-
         if (positive && number > 0) {
             return true;
         }
-
         if (number < minNumber || number > maxNumber) {
             return false;
         }
