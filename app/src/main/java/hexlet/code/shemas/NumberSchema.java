@@ -1,15 +1,9 @@
 package hexlet.code.shemas;
 
-public class NumberSchema {
-    private boolean required;
+public class NumberSchema extends BaseSchema {
     private boolean positive;
     private int minNumber;
     private int maxNumber;
-
-    public NumberSchema required() {
-        this.required = true;
-        return this;
-    }
 
     public NumberSchema positive() {
         this.positive = true;
@@ -22,7 +16,9 @@ public class NumberSchema {
         return this;
     }
 
-    public boolean isValid(Integer number) {
+    @Override
+    public boolean isValid(Object data) {
+        Integer number = (Integer) data;
         if (required) {
             if (number == null) {
                 return false;
