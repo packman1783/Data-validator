@@ -1,12 +1,18 @@
 package hexlet.code.shemas;
 
-public abstract class BaseSchema {
-    protected boolean required;
+import java.util.HashMap;
+import java.util.Map;
 
-    public BaseSchema required() {
-        this.required = true;
-        return this;
+public abstract class BaseSchema {
+    private final Map<String, Object> rules;
+
+    public BaseSchema() {
+        rules = new HashMap<>();
     }
 
-    public abstract boolean isValid(Object data);
+    public void addRules(String name, Object statement) {
+        rules.put(name, statement);
+    }
+
+    public boolean isValid(Object data);
 }
