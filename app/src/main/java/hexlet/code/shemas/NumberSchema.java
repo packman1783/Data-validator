@@ -7,12 +7,14 @@ public class NumberSchema extends BaseSchema {
 
     public NumberSchema positive() {
         this.positive = true;
+
         return this;
     }
 
     public NumberSchema range(int minNum, int maxNum) {
         this.minNumber = minNum;
         this.maxNumber = maxNum;
+
         return this;
     }
 
