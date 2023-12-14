@@ -3,38 +3,43 @@ package hexlet.code.shemas;
 import java.util.Map;
 
 public class MapSchema extends BaseSchema {
-    private Integer expectedSize = null;
-    private Map<String, BaseSchema> map;
+    public MapSchema() {
+        super();
+        Object statement = input -> {
+            if (input == null || input instanceof Map) {
+                return true;
+            }
+        };
+        addRules("map", statement);
+    }
+
+    public MapSchema required() {
+        Object statement = input -> input != null;
+        addRules("required", statement);
+        return this;
+    }
 
     public MapSchema sizeOf(int size) {
-        this.expectedSize = size;
+        Object statement = input -> {
+            if (input != null && ((Map) input).size() == size) {
+                return true;
+            }
+        };
+        addRules("sizeOf", statement);
         return this;
     }
 
     public MapSchema shape(Map<String, BaseSchema> shape) {
-        this.map = shape;
-        return this;
-    }
-
-    @Override
-    public boolean isValid(Object data) {
-        if (data == null) {
-            return !required;
-        }
-        if (required && ((Map) data).isEmpty()) {
-            return false;
-        }
-        if (expectedSize != null && ((Map) data).size() != expectedSize) {
-            return false;
-        }
-        for (Map.Entry<String, BaseSchema> entry : map.entrySet()) {
+        for (Map.Entry<String, BaseSchema> entry : shape.entrySet()) {
             String key = entry.getKey();
-            BaseSchema schema = entry.getValue();
-            if (!((Map) data).containsKey(key) || !schema.isValid(((Map) data).get(key))) {
-                return false;
-            }
+            BaseSchema value = entry.getValue();
+            Object statement = input -> {
+                if (!((Map) input).containsKey(key) || !value.isValid(((Map) input).get(key))) {
+                    return false;
+                }
+            };
+            addRules("shape", statement);
         }
-
-        return true;
+        return this;
     }
 }
