@@ -3,41 +3,45 @@ package hexlet.code.shemas;
 public class StringSchema extends BaseSchema {
     public StringSchema() {
         super();
-        Object statement = input -> {
+        ValidationRule stringRule = input -> {
             if (input == null || input instanceof String) {
                 return true;
             }
+            return false;
         };
-        addRules("string", statement);
+        addRules("string", stringRule);
     }
 
     public StringSchema required() {
-        Object statement = input -> {
-            if(input != null && !input.equals("")) {
+        ValidationRule requiredRule = input -> {
+            if (input != null && !((String) input).isEmpty()) {
                 return true;
             }
+            return false;
         };
-        addRules("required", statement);
+        addRules("required", requiredRule);
         return this;
     }
 
     public StringSchema minLength(int length) {
-        Object statement = input -> {
+        ValidationRule minLangthRule = input -> {
             if(input != null && ((String) input).length() >= length) {
                 return true;
             }
+            return false;
         };
-        addRules("minLength", statement);
+        addRules("minLength", minLangthRule);
         return this;
     }
 
     public StringSchema contains(String substring) {
-        Object statement = input -> {
+        ValidationRule containsRule = input -> {
             if (input != null && ((String) input).contains(substring)) {
                 return true;
             }
+            return false;
         };
-        addRules("contains", statement);
+        addRules("contains", containsRule);
         return this;
     }
 }
