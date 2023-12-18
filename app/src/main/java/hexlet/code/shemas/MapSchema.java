@@ -5,41 +5,44 @@ import java.util.Map;
 public class MapSchema extends BaseSchema {
     public MapSchema() {
         super();
-        Object statement = input -> {
+        ValidationRule mapRule = input -> {
             if (input == null || input instanceof Map) {
                 return true;
             }
+            return false;
         };
-        addRules("map", statement);
+        addRules("map", mapRule);
     }
 
     public MapSchema required() {
-        Object statement = input -> input != null;
-        addRules("required", statement);
+        ValidationRule requiredRule = input -> input != null;
+        addRules("required", requiredRule);
         return this;
     }
 
     public MapSchema sizeOf(int size) {
-        Object statement = input -> {
+        ValidationRule sizeOfRule = input -> {
             if (input != null && ((Map) input).size() == size) {
                 return true;
             }
+            return false;
         };
-        addRules("sizeOf", statement);
+        addRules("sizeOf", sizeOfRule);
         return this;
     }
 
     public MapSchema shape(Map<String, BaseSchema> shape) {
-        for (Map.Entry<String, BaseSchema> entry : shape.entrySet()) {
-            String key = entry.getKey();
-            BaseSchema value = entry.getValue();
-            Object statement = input -> {
+        ValidationRule shapeRule = input -> {
+            for (Map.Entry<String, BaseSchema> entry : shape.entrySet()) {
+                String key = entry.getKey();
+                BaseSchema value = entry.getValue();
                 if (!((Map) input).containsKey(key) || !value.isValid(((Map) input).get(key))) {
                     return false;
                 }
-            };
-            addRules("shape", statement);
-        }
+            }
+            return true;
+        };
+        addRules("shape", shapeRule);
         return this;
     }
 }
