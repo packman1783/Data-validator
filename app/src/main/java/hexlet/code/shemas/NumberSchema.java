@@ -3,37 +3,40 @@ package hexlet.code.shemas;
 public class NumberSchema extends BaseSchema {
     public NumberSchema() {
         super();
-        Object statement = input -> {
+        ValidationRule integerRule = input -> {
             if (input == null || input instanceof Integer) {
                 return true;
             }
+            return false;
         };
-        addRules("integer", statement);
+        addRules("integer", integerRule);
     }
 
     public NumberSchema required() {
-        Object statement = input -> input != null;
-        addRules("required", statement);
+        ValidationRule requiredRule = input -> input != null;
+        addRules("required", requiredRule);
         return this;
     }
 
     public NumberSchema positive() {
-        Object statement = input -> {
-            if (input instanceof Integer && (Integer) input > 0 {
+        ValidationRule positiveRule = input -> {
+            if (input instanceof Integer && (Integer) input > 0) {
                 return true;
             }
+            return false;
         };
-        addRules("positive", statement);
+        addRules("positive", positiveRule);
         return this;
     }
 
     public NumberSchema range(int minNum, int maxNum) {
-        Object statement = input -> {
+        ValidationRule rangeRule = input -> {
             if (input instanceof Integer && (Integer) input >= minNum && (Integer) input <= maxNum) {
                 return true;
             }
+            return false;
         };
-        addRules("range", statement);
+        addRules("range", rangeRule);
         return this;
     }
 }
