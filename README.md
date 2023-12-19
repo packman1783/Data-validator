@@ -14,6 +14,7 @@ Calling the string() method creates a StringSchema, it needs to be configured by
  * required() - does not allow null or empty string
  * minLength() - the string must be equal to or longer than the specified number
  * contains() - the string must contain a specific substring
+
 for example: 
 ```
 Validator v = new Validator();
@@ -25,6 +26,7 @@ Calling the number() method defines the NumberSchema. This schema is used for nu
  * required() - does not allow null
  * positive() — the sign of the number must be positive
  * range() - adds a valid range that the number value must fall within, including boundaries
+
 for example:
 ```
 Validator v = new Validator();
@@ -36,6 +38,7 @@ Calling the map() method defines a MapSchema. This schema is used to validate Ma
  * required() - does not allow null, Map data type required
  * sizeof() - the number of key-value pairs in the Map object must be equal to the specified one
  * shape() - allows you to describe validation for the values of each key of a Map object
+
 for example:
 ```
 Validator v = new Validator();
