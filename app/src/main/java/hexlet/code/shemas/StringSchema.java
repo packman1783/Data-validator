@@ -25,7 +25,7 @@ public class StringSchema extends BaseSchema {
 
     public StringSchema minLength(int length) {
         ValidationRule minLangthRule = input -> {
-            if(input != null && ((String) input).length() >= length) {
+            if (input != null && ((String) input).length() >= length) {
                 return true;
             }
             return false;
