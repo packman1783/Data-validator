@@ -7,12 +7,11 @@
 Data validator is a library that can be used to check the correctness of strings, numbers and maps, according to customizable rules for each data type.
 
 ## Use:
-You need to create an object of this program.
 Create and configure a data validation scheme that will contain verification rules.
 
-Calling the string() method creates a StringSchema, it needs to be configured by adding constraints using the methods:
+Calling the string() method creates a StringSchema, using the methods:
  * required() - does not allow null or empty string
- * minLength() - the string must be equal to or longer than the specified number
+ * minLength() - set the minimum required length for a string
  * contains() - the string must contain a specific substring
 
 for example: 
@@ -22,10 +21,10 @@ StringSchema schema = v.string().required().minLength(5).contains("hex");
 schema.isValid("what does the fox say");
 ```
 
-Calling the number() method defines the NumberSchema. This schema is used for number validation with methods:
+Calling the number() method defines the NumberSchema, with methods:
  * required() - does not allow null
- * positive() — the sign of the number must be positive
- * range() - adds a valid range that the number value must fall within, including boundaries
+ * positive() — the number must be positive
+ * range() - adds a range that the number must fall within, including boundaries
 
 for example:
 ```
@@ -34,9 +33,9 @@ NumberSchema schema = v.number().required().positive().range(-5, 5);
 schema.isValid(10);
 ```
 
-Calling the map() method defines a MapSchema. This schema is used to validate Map objects:
+Calling the map() method defines a MapSchema, to validate Map objects:
  * required() - does not allow null, Map data type required
- * sizeof() - the number of key-value pairs in the Map object must be equal to the specified one
+ * sizeof() - the number of key-value pairs in the Map object must be equal
  * shape() - allows you to describe validation for the values of each key of a Map object
 
 for example:
