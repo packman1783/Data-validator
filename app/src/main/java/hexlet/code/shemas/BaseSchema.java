@@ -16,7 +16,6 @@ public class BaseSchema {
 
     public boolean isValid(Object data) {
         for (Map.Entry<String, ValidationRule> entry : rules.entrySet()) {
-            String nameRules = entry.getKey();
             ValidationRule rule = entry.getValue();
             if (!checkRule(rule, data)) {
                 return false;
