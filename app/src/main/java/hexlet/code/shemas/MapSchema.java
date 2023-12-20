@@ -18,7 +18,7 @@ public class MapSchema extends BaseSchema {
     }
 
     public MapSchema sizeOf(int size) {
-        ValidationRule sizeOfRule = input -> input != null && ((Map) input).size() == size;
+        ValidationRule sizeOfRule = input -> input != null && ((Map<?, ?>) input).size() == size;
         addRules("sizeOf", sizeOfRule);
 
         return this;
@@ -29,7 +29,7 @@ public class MapSchema extends BaseSchema {
             for (Map.Entry<String, BaseSchema> entry : shape.entrySet()) {
                 String key = entry.getKey();
                 BaseSchema value = entry.getValue();
-                if (!((Map) input).containsKey(key) || !value.isValid(((Map) input).get(key))) {
+                if (!((Map<?, ?>) input).containsKey(key) || !value.isValid(((Map<?, ?>) input).get(key))) {
                     return false;
                 }
             }
