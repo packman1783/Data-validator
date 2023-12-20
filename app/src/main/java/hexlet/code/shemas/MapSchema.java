@@ -1,6 +1,7 @@
 package hexlet.code.shemas;
 
 import java.util.Map;
+import java.util.Objects;
 
 public class MapSchema extends BaseSchema {
     public MapSchema() {
@@ -10,7 +11,7 @@ public class MapSchema extends BaseSchema {
     }
 
     public MapSchema required() {
-        ValidationRule requiredRule = input -> input != null;
+        ValidationRule requiredRule = Objects::nonNull;
         addRules("required", requiredRule);
 
         return this;
