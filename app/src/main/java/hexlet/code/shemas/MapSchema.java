@@ -5,29 +5,21 @@ import java.util.Map;
 public class MapSchema extends BaseSchema {
     public MapSchema() {
         super();
-        ValidationRule mapRule = input -> {
-            if (input == null || input instanceof Map) {
-                return true;
-            }
-            return false;
-        };
+        ValidationRule mapRule = input -> input == null || input instanceof Map;
         addRules("map", mapRule);
     }
 
     public MapSchema required() {
         ValidationRule requiredRule = input -> input != null;
         addRules("required", requiredRule);
+
         return this;
     }
 
     public MapSchema sizeOf(int size) {
-        ValidationRule sizeOfRule = input -> {
-            if (input != null && ((Map) input).size() == size) {
-                return true;
-            }
-            return false;
-        };
+        ValidationRule sizeOfRule = input -> input != null && ((Map) input).size() == size;
         addRules("sizeOf", sizeOfRule);
+
         return this;
     }
 
@@ -43,6 +35,7 @@ public class MapSchema extends BaseSchema {
             return true;
         };
         addRules("shape", shapeRule);
+
         return this;
     }
 }
