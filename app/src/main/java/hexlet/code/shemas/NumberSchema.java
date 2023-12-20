@@ -1,5 +1,7 @@
 package hexlet.code.shemas;
 
+import java.util.Objects;
+
 public class NumberSchema extends BaseSchema {
     public NumberSchema() {
         super();
@@ -8,7 +10,7 @@ public class NumberSchema extends BaseSchema {
     }
 
     public NumberSchema required() {
-        ValidationRule requiredRule = input -> input != null;
+        ValidationRule requiredRule = Objects::nonNull;
         addRules("required", requiredRule);
 
         return this;
