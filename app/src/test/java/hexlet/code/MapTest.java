@@ -53,7 +53,7 @@ public class MapTest {
         Map<String, Object> human1 = new HashMap<>();
         human1.put("name", "Kolya");
 
-        schema.sizeOf(2);
+        schema.sizeof(2);
 
         assertFalse(schema.isValid(human1));
         human1.put("age", 100);

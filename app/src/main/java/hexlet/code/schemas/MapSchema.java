@@ -17,7 +17,7 @@ public class MapSchema extends BaseSchema {
         return this;
     }
 
-    public MapSchema sizeOf(int size) {
+    public MapSchema sizeof(int size) {
         ValidationRule sizeOfRule = input -> input != null && ((Map<?, ?>) input).size() == size;
         addRules("sizeOf", sizeOfRule);
 
