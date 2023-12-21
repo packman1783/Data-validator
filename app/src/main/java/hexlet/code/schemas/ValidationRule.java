@@ -1,4 +1,4 @@
-package hexlet.code.shemas;
+package hexlet.code.schemas;
 
 @FunctionalInterface
 public interface ValidationRule {
