@@ -5,11 +5,7 @@ import java.util.Map;
 import java.util.function.Predicate;
 
 public class BaseSchema {
-    private final Map<String, Predicate<Object>> rules;
-
-    public BaseSchema() {
-        rules = new HashMap<>();
-    }
+    private final Map<String, Predicate<Object>> rules = new HashMap<>();
 
     public void addRules(String name, Predicate<Object> rule) {
         rules.put(name, rule);
