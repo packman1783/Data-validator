@@ -38,31 +38,18 @@ public class ValidTest {
         mapSchema.shape(data);
 
         Map<String, Object> human1 = new HashMap<>();
-        human1.put("name", "Kolya");
-        human1.put("age", 100);
-        assertTrue(mapSchema.isValid(human1));
+        human1.put("name", "");
+        human1.put("age", -5);
+        assertFalse(mapSchema.isValid(human1));
 
         Map<String, Object> human2 = new HashMap<>();
-        human2.put("name", "");
-        human2.put("age", -5);
-        assertFalse(mapSchema.isValid(human2));
-    }
-
-    @Test
-    public void sizeTest() {
-        data.put("name", validator.string().required());
-        data.put("age", validator.number().positive());
-
-        mapSchema.shape(data);
-
-        Map<String, Object> human1 = new HashMap<>();
-        human1.put("name", "Kolya");
+        human2.put("name", "Kolya");
 
         mapSchema.sizeof(2);
 
-        assertFalse(mapSchema.isValid(human1));
-        human1.put("age", 100);
-        assertTrue(mapSchema.isValid(human1));
+        assertFalse(mapSchema.isValid(human2));
+        human2.put("age", 100);
+        assertTrue(mapSchema.isValid(human2));
     }
 
     @Test
@@ -70,17 +57,11 @@ public class ValidTest {
         assertTrue(numberSchema.isValid(null));
         numberSchema.required();
         assertFalse(numberSchema.isValid(null));
-    }
 
-    @Test
-    public void rangeTest() {
         numberSchema.range(2, 10);
         assertTrue(numberSchema.isValid(8));
         assertFalse(numberSchema.isValid(20));
-    }
 
-    @Test
-    public void positiveTest() {
         numberSchema.positive();
         assertTrue(numberSchema.isValid(8));
         assertFalse(numberSchema.isValid(-5));
@@ -93,19 +74,13 @@ public class ValidTest {
         stringSchema.required();
         assertFalse(stringSchema.isValid(null));
         assertFalse(stringSchema.isValid(""));
-    }
 
-    @Test
-    public void minLengthTest() {
-        stringSchema.minLength(5);
-        assertTrue(stringSchema.isValid("hello"));
-        assertFalse(stringSchema.isValid("what"));
-    }
-
-    @Test
-    public void containTest() {
         stringSchema.contains("wh");
         assertTrue(stringSchema.isValid("what"));
         assertFalse(stringSchema.isValid("wat"));
+
+        stringSchema.minLength(5);
+        assertTrue(stringSchema.isValid("what does the fox say"));
+        assertFalse(stringSchema.isValid("what"));
     }
 }
