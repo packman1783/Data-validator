@@ -22,7 +22,7 @@ public class ValidTest {
     private Map<String, BaseSchema> data;
 
     @BeforeEach
-    protected void beforeEach() {
+    public final void beforeEach() {
         validator = new Validator();
         mapSchema = validator.map();
         numberSchema = validator.number();
