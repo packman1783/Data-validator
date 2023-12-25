@@ -5,7 +5,6 @@ import java.util.function.Predicate;
 
 public class NumberSchema extends BaseSchema {
     public NumberSchema() {
-        super();
         Predicate<Object> integerRule = input -> input == null || input instanceof Integer;
         addRules("integer", integerRule);
     }
