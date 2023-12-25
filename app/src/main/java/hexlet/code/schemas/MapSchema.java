@@ -2,30 +2,31 @@ package hexlet.code.schemas;
 
 import java.util.Map;
 import java.util.Objects;
+import java.util.function.Predicate;
 
 public class MapSchema extends BaseSchema {
     public MapSchema() {
         super();
-        ValidationRule mapRule = input -> input == null || input instanceof Map;
+        Predicate<Object> mapRule = input -> input == null || input instanceof Map;
         addRules("map", mapRule);
     }
 
     public MapSchema required() {
-        ValidationRule requiredRule = Objects::nonNull;
+        Predicate<Object> requiredRule = Objects::nonNull;
         addRules("required", requiredRule);
 
         return this;
     }
 
     public MapSchema sizeof(int size) {
-        ValidationRule sizeOfRule = input -> input != null && ((Map<?, ?>) input).size() == size;
+        Predicate<Object> sizeOfRule = input -> input != null && ((Map<?, ?>) input).size() == size;
         addRules("sizeOf", sizeOfRule);
 
         return this;
     }
 
     public MapSchema shape(Map<String, BaseSchema> shape) {
-        ValidationRule shapeRule = input -> {
+        Predicate<Object> shapeRule = input -> {
             for (Map.Entry<String, BaseSchema> entry : shape.entrySet()) {
                 String key = entry.getKey();
                 BaseSchema value = entry.getValue();
