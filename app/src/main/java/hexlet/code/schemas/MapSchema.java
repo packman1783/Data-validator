@@ -6,7 +6,6 @@ import java.util.function.Predicate;
 
 public class MapSchema extends BaseSchema {
     public MapSchema() {
-        super();
         Predicate<Object> mapRule = input -> input == null || input instanceof Map;
         addRules("map", mapRule);
     }
