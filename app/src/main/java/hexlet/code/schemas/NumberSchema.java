@@ -17,14 +17,14 @@ public class NumberSchema extends BaseSchema {
     }
 
     public NumberSchema positive() {
-        Predicate<Object> positiveRule = input -> (Integer) input > 0;
+        Predicate<Object> positiveRule = input -> input != null && (Integer) input > 0;
         addRules("positive", positiveRule);
 
         return this;
     }
 
     public NumberSchema range(int minNum, int maxNum) {
-        Predicate<Object> rangeRule = input -> (Integer) input >= minNum && (Integer) input <= maxNum;
+        Predicate<Object> rangeRule = input -> input != null && (Integer) input >= minNum && (Integer) input <= maxNum;
         addRules("range", rangeRule);
 
         return this;
