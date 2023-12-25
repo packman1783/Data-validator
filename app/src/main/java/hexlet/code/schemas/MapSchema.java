@@ -18,7 +18,7 @@ public class MapSchema extends BaseSchema {
     }
 
     public MapSchema sizeof(int size) {
-        Predicate<Object> sizeOfRule = input -> input != null && ((Map<?, ?>) input).size() == size;
+        Predicate<Object> sizeOfRule = input -> ((Map<?, ?>) input).size() == size;
         addRules("sizeOf", sizeOfRule);
 
         return this;
