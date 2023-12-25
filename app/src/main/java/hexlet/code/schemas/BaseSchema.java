@@ -12,6 +12,9 @@ public class BaseSchema {
     }
 
     public boolean isValid(Object data) {
+        if (data == null && !rules.containsKey("required")) {
+            return true;
+        }
         for (Map.Entry<String, Predicate<Object>> entry : rules.entrySet()) {
             Predicate<Object> rule = entry.getValue();
             if (!rule.test(data)) {
