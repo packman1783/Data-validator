@@ -7,11 +7,11 @@ import java.util.function.Predicate;
 public class BaseSchema {
     private final Map<String, Predicate<Object>> rules = new HashMap<>();
 
-    public void addRules(String name, Predicate<Object> rule) {
+    public final void addRules(String name, Predicate<Object> rule) {
         rules.put(name, rule);
     }
 
-    public boolean isValid(Object data) {
+    public final boolean isValid(Object data) {
         if (data == null && !rules.containsKey("required")) {
             return true;
         }
