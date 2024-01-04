@@ -24,7 +24,8 @@ public final class NumberSchema extends BaseSchema {
     }
 
     public NumberSchema range(int minNum, int maxNum) {
-        Predicate<Object> rangeRule = input -> input instanceof Integer && (Integer) input >= minNum && (Integer) input <= maxNum;
+        Predicate<Object> rangeRule = input -> input instanceof Integer
+                && (Integer) input >= minNum && (Integer) input <= maxNum;
         addRules("range", rangeRule);
 
         return this;
