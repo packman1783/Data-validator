@@ -27,11 +27,3 @@ jobs:
         with:
            coverageCommand: make report
            coverageLocations: ${{github.workspace}}/app/build/reports/jacoco/test/jacocoTestReport.xml:jacoco
-
-      - name: Run Node.js 20
-        uses: actions/setup-node@v3
-        with:
-          node-version: '20'
-      - run: 'setup.js'
-      - run: 'index.js'
-      - run: 'cleanup.js'
