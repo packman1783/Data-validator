@@ -15,12 +15,9 @@ public class BaseSchema {
         if (data == null && !rules.containsKey("required")) {
             return true;
         }
-        for (Map.Entry<String, Predicate<Object>> entry : rules.entrySet()) {
-            Predicate<Object> rule = entry.getValue();
-            if (!rule.test(data)) {
-                return false;
-            }
-        }
-        return true;
+
+        return rules.values()
+            .stream()
+            .allMatch(rule -> rule.test(data));
     }
 }
