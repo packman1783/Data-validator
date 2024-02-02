@@ -15,7 +15,6 @@ public class BaseSchema {
         if (data == null && !rules.containsKey("required")) {
             return true;
         }
-
         return rules.values()
             .stream()
             .allMatch(rule -> rule.test(data));
