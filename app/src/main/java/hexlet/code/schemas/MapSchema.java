@@ -25,16 +25,12 @@ public final class MapSchema extends BaseSchema {
     }
 
     public MapSchema shape(Map<String, BaseSchema> shape) {
-        Predicate<Object> shapeRule = input -> {
-            for (Map.Entry<String, BaseSchema> entry : shape.entrySet()) {
-                String key = entry.getKey();
-                BaseSchema value = entry.getValue();
-                if (!((Map<?, ?>) input).containsKey(key) || !value.isValid(((Map<?, ?>) input).get(key))) {
-                    return false;
-                }
-            }
-            return true;
-        };
+        Predicate<Object> shapeRule = input -> shape.entrySet().stream()
+                .allMatch(entry -> {
+                    String key = entry.getKey();
+                    BaseSchema value = entry.getValue();
+                    return ((Map<?, ?>) input).containsKey(key) && value.isValid(((Map<?, ?>) input).get(key));
+                });
         addRules("shape", shapeRule);
 
         return this;
