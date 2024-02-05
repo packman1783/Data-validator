@@ -16,8 +16,8 @@ public final class StringSchema extends BaseSchema {
     }
 
     public StringSchema minLength(int length) {
-        Predicate<Object> minLangthRule = input -> ((String) input).length() >= length;
-        addRules("minLength", minLangthRule);
+        Predicate<Object> minLengthRule = input -> ((String) input).length() >= length;
+        addRules("minLength", minLengthRule);
 
         return this;
     }
