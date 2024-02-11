@@ -10,21 +10,21 @@ public final class MapSchema<V extends BaseSchema> extends BaseSchema {
         addRules("map", mapRule);
     }
 
-    public MapSchema required() {
+    public MapSchema<V> required() {
         Predicate<Object> requiredRule = Objects::nonNull;
         addRules("required", requiredRule);
 
         return this;
     }
 
-    public MapSchema sizeof(int size) {
+    public MapSchema<V> sizeof(int size) {
         Predicate<Object> sizeOfRule = input -> ((Map<?, ?>) input).size() == size;
         addRules("sizeOf", sizeOfRule);
 
         return this;
     }
 
-    public MapSchema shape(Map<String, BaseSchema> shape) {
+    public MapSchema<V> shape(Map<String, BaseSchema> shape) {
         Predicate<Object> shapeRule = input -> shape.entrySet().stream()
                 .allMatch(entry -> {
                     String key = entry.getKey();
