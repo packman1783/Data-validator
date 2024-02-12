@@ -15,41 +15,32 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ValidTest {
-    private static MapSchema mapSchema;
-    private static NumberSchema numberSchema;
-    private static StringSchema stringSchema;
-    private static Validator validator;
-    private Map<String, BaseSchema<?>> data;
-
-    @BeforeEach
-    public final void beforeEach() {
-        validator = new Validator();
-        mapSchema = validator.map();
-        numberSchema = validator.number();
-        stringSchema = validator.string();
-        data = new HashMap<>();
-    }
+    private static final MapSchema mapSchema = new Validator().map();
+    private static final NumberSchema numberSchema = new Validator().number();
+    private static final StringSchema stringSchema = new Validator().string();
+    private final Map<String, BaseSchema<String>> data = new HashMap<>();
 
     @Test
     public void validMapTest() {
-        data.put("name", validator.string().required());
-        data.put("age", validator.number().positive());
+        data.put("firstName", new Validator().string().required());
+        data.put("lastName", new Validator().string().required().minLength(2));
 
         mapSchema.shape(data);
 
-        Map<String, Object> human1 = new HashMap<>();
-        human1.put("name", "");
-        human1.put("age", -5);
-        assertFalse(mapSchema.isValid(human1));
+        Map<String, String> human1 = new HashMap<>();
+        human1.put("firstName", "John");
+        human1.put("lastName", "Smith");
+        assertTrue(mapSchema.isValid(human1));
 
-        Map<String, Object> human2 = new HashMap<>();
-        human2.put("name", "Kolya");
-
-        mapSchema.sizeof(2);
-
+        Map<String, String> human2 = new HashMap<>();
+        human2.put("firstName", "John");
+        human2.put("lastName", null);
         assertFalse(mapSchema.isValid(human2));
-        human2.put("age", 100);
-        assertTrue(mapSchema.isValid(human2));
+
+        Map<String, String> human3 = new HashMap<>();
+        human3.put("firstName", "Anna");
+        human3.put("lastName", "B");
+        assertFalse(mapSchema.isValid(human3));
     }
 
     @Test
