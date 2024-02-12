@@ -1,5 +1,6 @@
 package hexlet.code.schemas;
 
+import java.util.Objects;
 import java.util.function.Predicate;
 
 public final class NumberSchema extends BaseSchema<Integer> {
@@ -8,7 +9,7 @@ public final class NumberSchema extends BaseSchema<Integer> {
     }
 
     public NumberSchema required() {
-        addRules("required", input -> input != null);
+        addRules("required", Objects::nonNull);
         return this;
     }
 
