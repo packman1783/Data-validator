@@ -15,11 +15,11 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ValidTest {
-    private static MapSchema<BaseSchema> mapSchema;
+    private static MapSchema mapSchema;
     private static NumberSchema numberSchema;
     private static StringSchema stringSchema;
     private static Validator validator;
-    private Map<String, BaseSchema> data;
+    private Map<String, BaseSchema<?>> data;
 
     @BeforeEach
     public final void beforeEach() {
