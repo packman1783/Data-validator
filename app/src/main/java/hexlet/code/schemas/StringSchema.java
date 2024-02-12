@@ -1,31 +1,22 @@
 package hexlet.code.schemas;
 
-import java.util.function.Predicate;
-
 public final class StringSchema extends BaseSchema<String> {
     public StringSchema() {
-        Predicate<Object> stringRule = input -> input == null || input instanceof String;
-        addRules("string", stringRule);
+        addRules("string", input -> input == null || input instanceof String);
     }
 
     public StringSchema required() {
-        Predicate<Object> requiredRule = input -> input != null && !((String) input).isEmpty();
-        addRules("required", requiredRule);
-
+        addRules("required", input -> input != null && !((String) input).isEmpty());
         return this;
     }
 
     public StringSchema minLength(int length) {
-        Predicate<Object> minLengthRule = input -> input == null || ((String) input).length() >= length;
-        addRules("minLength", minLengthRule);
-
+        addRules("minLength", input -> input == null || ((String) input).length() >= length);
         return this;
     }
 
     public StringSchema contains(String substring) {
-        Predicate<Object> containsRule = input -> input != null && ((String) input).contains(substring);
-        addRules("contains", containsRule);
-
+        addRules("contains", input -> input != null && ((String) input).contains(substring));
         return this;
     }
 }
