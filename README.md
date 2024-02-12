@@ -41,17 +41,19 @@ schema.isValid(10);
 for example:
 ```
 Validator v = new Validator();
-Map<String, BaseSchema> schemas = new HashMap<>();
-schemas.put("name", v.string().required());
-schemas.put("age", v.number().positive());
+Map<String, BaseSchema<String>> schemas = new HashMap<>();
+schemas.put("firstName", v.string().required());
+schemas.put("lastName", v.string().required().minLength(2));
 
 schema.shape(schemas);
 
-Map<String, Object> human = new HashMap<>();
-human1.put("name", "Kolya");
-human1.put("age", 100);
+Map<String, String> human1 = new HashMap<>();
+human1.put("firstName", "John");
+human1.put("lastName", "Smith");
+schema.isValid(human1);
 
-schema.sizeof(2);
-
-schema.isValid(human);
+Map<String, String> human2 = new HashMap<>();
+human2.put("firstName", "John");
+human2.put("lastName", null);
+schema.isValid(human2);
 ```
