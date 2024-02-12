@@ -16,14 +16,14 @@ public final class StringSchema extends BaseSchema<String> {
     }
 
     public StringSchema minLength(int length) {
-        Predicate<Object> minLengthRule = input -> ((String) input).length() >= length;
+        Predicate<Object> minLengthRule = input -> input == null || ((String) input).length() >= length;
         addRules("minLength", minLengthRule);
 
         return this;
     }
 
     public StringSchema contains(String substring) {
-        Predicate<Object> containsRule = input -> ((String) input).contains(substring);
+        Predicate<Object> containsRule = input -> input != null && ((String) input).contains(substring);
         addRules("contains", containsRule);
 
         return this;
