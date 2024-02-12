@@ -4,31 +4,31 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.function.Predicate;
 
-public final class MapSchema<V extends BaseSchema> extends BaseSchema {
+public final class MapSchema extends BaseSchema<Map<?, ?>> {
     public MapSchema() {
         Predicate<Object> mapRule = input -> input == null || input instanceof Map;
         addRules("map", mapRule);
     }
 
-    public MapSchema<V> required() {
+    public MapSchema required() {
         Predicate<Object> requiredRule = Objects::nonNull;
         addRules("required", requiredRule);
 
         return this;
     }
 
-    public MapSchema<V> sizeof(int size) {
+    public MapSchema sizeof(int size) {
         Predicate<Object> sizeOfRule = input -> ((Map<?, ?>) input).size() == size;
         addRules("sizeOf", sizeOfRule);
 
         return this;
     }
 
-    public MapSchema<V> shape(Map<String, BaseSchema> shape) {
+    public MapSchema shape(Map<String, BaseSchema<?>> shape) {
         Predicate<Object> shapeRule = input -> shape.entrySet().stream()
                 .allMatch(entry -> {
                     String key = entry.getKey();
-                    BaseSchema value = entry.getValue();
+                    BaseSchema<?> value = entry.getValue();
                     return ((Map<?, ?>) input).containsKey(key) && value.isValid(((Map<?, ?>) input).get(key));
                 });
         addRules("shape", shapeRule);
