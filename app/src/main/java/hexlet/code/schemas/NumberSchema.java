@@ -3,7 +3,7 @@ package hexlet.code.schemas;
 import java.util.Objects;
 import java.util.function.Predicate;
 
-public final class NumberSchema extends BaseSchema {
+public final class NumberSchema extends BaseSchema<Integer> {
     public NumberSchema() {
         Predicate<Object> integerRule = input -> input == null || input instanceof Integer;
         addRules("integer", integerRule);
