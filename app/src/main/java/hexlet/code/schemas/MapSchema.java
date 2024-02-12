@@ -24,11 +24,11 @@ public final class MapSchema extends BaseSchema<Map<?, ?>> {
         return this;
     }
 
-    public MapSchema shape(Map<String, BaseSchema<?>> shape) {
+    public <T> MapSchema shape(Map<String, BaseSchema<?>> shape) {
         Predicate<Object> shapeRule = input -> shape.entrySet().stream()
                 .allMatch(entry -> {
                     String key = entry.getKey();
-                    BaseSchema<?> value = entry.getValue();
+                    BaseSchema<T> value = (BaseSchema<T>) entry.getValue();
                     return ((Map<?, ?>) input).containsKey(key) && value.isValid(((Map<?, ?>) input).get(key));
                 });
         addRules("shape", shapeRule);
